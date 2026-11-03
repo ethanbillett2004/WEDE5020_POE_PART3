@@ -243,6 +243,37 @@ figcaption {
   grid-template-columns:repeat(3,1fr);
   gap:0
 }
+
+.product-controls {
+  display:grid;
+  grid-template-columns:minmax(0,2fr) repeat(2,minmax(0,1fr));
+  gap:1rem;
+  align-items:end;
+  max-width:900px;
+  margin:0 auto 1rem
+}
+
+.product-controls label {
+  margin:0
+}
+
+.product-results {
+  max-width:900px;
+  margin:0 auto 1.5rem;
+  font-size:.9rem
+}
+
+.product-empty {
+  max-width:900px;
+  margin:2rem auto;
+  padding:1.5rem;
+  border-left:3px solid var(--wine);
+  background:#fff
+}
+
+.product-empty[hidden] {
+  display:none
+}
 @keyframes rise-in {
   from {
     opacity:0
@@ -553,7 +584,12 @@ h1 {
   display:block
 }
 .product-grid {
-  grid-template-columns:1fr
+grid-template-columns:1fr
+}
+
+.product-controls {
+grid-template-columns:1fr;
+gap:.25rem
 }
 .product p {
   min-height:0
