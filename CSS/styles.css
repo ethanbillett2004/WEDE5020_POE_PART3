@@ -415,6 +415,34 @@ input:focus,select:focus,textarea:focus {
   outline:2px solid var(--wine);
   outline-offset:2px
 }
+input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"] {
+  border-color:#a32626
+}
+
+.field-error {
+  color:#a32626;
+  font-size:.82rem;
+  font-weight:500;
+  line-height:1.4
+}
+
+.form-status {
+  min-height:1.5em;
+  margin:1rem 0 0;
+  font-weight:500
+}
+
+.form-status:not(:empty) {
+  padding:.85rem 1rem;
+  border-left:3px solid var(--wine);
+  background:white
+}
+
+.contact-form button:disabled {
+  cursor:wait;
+  opacity:.7
+}
+
 .small {
   font-size:.8rem
 }
