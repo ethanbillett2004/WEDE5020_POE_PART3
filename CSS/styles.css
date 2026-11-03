@@ -1027,12 +1027,6 @@ header .brand .brand-words>span {
    font-size: 2.8rem;
    
 }
-
-@media(max-width:650px) {
-  .enquiry-tabs {
-    grid-template-columns:repeat(2,minmax(0,1fr))
-  }
-}
   header .brand  {
    gap: .5rem;
    
@@ -1040,7 +1034,13 @@ header .brand .brand-words>span {
 
   .actions  {
    align-items: stretch;
-   
+  
+}
+
+@media(max-width:650px) {
+  .enquiry-tabs {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
 }
 
   .hours  {
