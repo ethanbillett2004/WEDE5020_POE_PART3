@@ -67,7 +67,10 @@
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      dialog.close();
+    } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
       showImage(activeIndex - 1);
     } else if (event.key === 'ArrowRight') {
