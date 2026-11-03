@@ -66,7 +66,7 @@ The project notes carried forward from Part 2 do not record specific assessor re
 - Required fields and South African mobile numbers are validated with inline error messages.
 - A review summary is generated before the enquiry is handed off to WhatsApp.
 - The WhatsApp link opens a prefilled message; visitors review it and choose whether to send it.
-- The contact form submits asynchronously through FormSubmit and displays sending, success, or failure feedback.
+- The contact form submits asynchronously through FormSubmit. If online delivery fails or the page is opened directly from a file, visitors can use pre-filled WhatsApp and email alternatives.
 
 ### Location, social, and local discovery
 
@@ -156,7 +156,7 @@ WEDE5020_POE_PART3/
 
 ## Configuration and Limitations
 
-- **Email delivery:** The contact form uses FormSubmit's AJAX endpoint for `abigail.billett17@gmail.com`. FormSubmit may require the recipient to complete its one-time email activation. Successful delivery should be verified on the deployed website; the site does not include its own mail server or database.
+- **Email delivery:** The contact form uses FormSubmit's AJAX endpoint for `abigail.billett17@gmail.com`. FormSubmit may require the recipient to complete its one-time email activation. Verify delivery on the deployed website; this static site has no mail server or database. If FormSubmit fails, the form offers pre-filled WhatsApp and email alternatives.
 - **WhatsApp:** The enquiry flow prepares a message but does not send it automatically. The customer must review and send the message in WhatsApp.
 - **Map:** The embedded map and external map link require an internet connection.
 - **Search indexing:** The sitemap and `robots.txt` contain an absolute GitHub Pages URL. Update them if the production domain or repository path changes, and confirm the site is published at that address.
