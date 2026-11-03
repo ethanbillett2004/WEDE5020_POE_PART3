@@ -39,50 +39,30 @@
         <p>Explore our treats, then tell us what you have in mind. Prices, flavours, designs and availability are confirmed with Abigail.</p>
       </section>
       <section class="section no-top">
-        <div class="product-grid">
-          <article class="product">
-            <img class="product-image" src="../Assets/06-1000299412.jpg" alt="Black and white rose cake" loading="lazy">
-            <span class="number">01</span>
-            <h3>Custom cakes</h3>
-            <p>A cake for your kind of celebration. Share your theme, colours and the number of guests.</p>
-            <a href="enquiry.html">Enquire about custom cakes <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="product">
-            <img class="product-image" src="../Assets/09-1000299409.jpg" alt="Liverpool Bento cake box" loading="lazy">
-            <span class="number">02</span>
-            <h3>Bento cake boxes</h3>
-            <p>Little cakes, lovely gestures. A thoughtful treat for birthdays and just-because moments.</p>
-            <a href="enquiry.html">Enquire about bento cake boxes <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="product">
-            <img class="product-image" src="../Assets/08-1000299410.jpg" alt="Black and gold birthday cake" loading="lazy">
-            <span class="number">03</span>
-            <h3>Mini cakes</h3>
-            <p>A smaller centrepiece for an intimate celebration.</p>
-            <a href="enquiry.html">Enquire about mini cakes <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="product">
-            <img class="product-image" src="../Assets/11-1000299407.jpg" alt="Red velvet cupcakes" loading="lazy">
-            <span class="number">04</span>
-            <h3>Cupcakes</h3>
-            <p>Pretty little treats for sharing, gifting and party tables.</p>
-            <a href="enquiry.html">Enquire about cupcakes <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="product">
-            <img class="product-image" src="../Assets/02-1000299416.jpg" alt="Peppermint tart" loading="lazy">
-            <span class="number">05</span>
-            <h3>Tarts & puddings</h3>
-            <p>Something sweet to bring everyone back to the table.</p>
-            <a href="enquiry.html">Enquire about tarts & puddings <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="product">
-            <img class="product-image" src="../Assets/13-1000299405.jpg" alt="Chocolate loaf cake" loading="lazy">
-            <span class="number">06</span>
-            <h3>Loaf & dessert cakes</h3>
-            <p>A slice of comfort for a gathering or an everyday treat.</p>
-            <a href="enquiry.html">Enquire about loaf & dessert cakes <span aria-hidden="true">↗</span></a>
-          </article>
+        <div class="product-controls" role="group" aria-label="Find a treat">
+          <label for="product-search">Search treats
+            <input id="product-search" type="search" placeholder="Search cakes, flavours, treats…" autocomplete="off">
+          </label>
+          <label for="product-category">Category
+            <select id="product-category">
+              <option value="all">All categories</option>
+              <option value="cakes">Cakes</option>
+              <option value="bento">Bento cakes</option>
+              <option value="cupcakes">Cupcakes</option>
+              <option value="desserts">Desserts</option>
+            </select>
+          </label>
+          <label for="product-sort">Sort by
+            <select id="product-sort">
+              <option value="featured">Featured</option>
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+            </select>
+          </label>
         </div>
+        <p class="product-results" id="product-results" aria-live="polite"></p>
+        <div class="product-grid"></div>
+        <p class="product-empty" id="product-empty" role="status" hidden>No products match your search. Try another term or category.</p>
       </section>
       <section class="section gallery-section">
         <div class="section-heading">
