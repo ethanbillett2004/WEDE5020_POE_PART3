@@ -109,6 +109,11 @@ These additions make the website more interactive and provide customers with eas
 * Business Information
 * Business Hours
 * Social Media Links
+* Facebook and WhatsApp page sharing
+* Local SEO metadata and bakery structured data
+* Search engine crawler instructions and XML sitemap
+* Content Security Policy and strict referrer policy
+* Lazy-loaded images and optimized banner image
 
 ---
 
