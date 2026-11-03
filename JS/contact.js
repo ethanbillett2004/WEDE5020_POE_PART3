@@ -6,6 +6,27 @@
   const submitButton = form.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.textContent;
 
+  const openMailClientFallback = () => {
+    const formData = new FormData(form);
+    const name = (formData.get('name') || '').toString().trim();
+    const email = (formData.get('email') || '').toString().trim();
+    const phone = (formData.get('phone') || '').toString().trim();
+    const subject = (formData.get('subject') || '').toString().trim();
+    const message = (formData.get('message') || '').toString().trim();
+
+    const mailBody = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      '',
+      message
+    ].filter((line) => line !== '').join('\n');
+
+    const mailtoLink = `mailto:abigail.billett17@gmail.com?subject=${encodeURIComponent(subject || 'Website enquiry - Sweet Treats by Abigail')}&body=${encodeURIComponent(mailBody)}`;
+    status.textContent = 'Your email app is opening with your message pre-filled. Please send it from there, or open this page through a web server to use the online form.';
+    window.location.href = mailtoLink;
+  };
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     status.textContent = '';
@@ -14,6 +35,11 @@
     if (invalidField) {
       invalidField.reportValidity();
       invalidField.focus();
+      return;
+    }
+
+    if (window.location.protocol === 'file:') {
+      openMailClientFallback();
       return;
     }
 
