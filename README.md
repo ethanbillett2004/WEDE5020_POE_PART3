@@ -58,6 +58,7 @@ The project notes carried forward from Part 2 do not record specific assessor re
 - Gallery images open in an in-page lightbox rather than navigating to standalone image files.
 - The lightbox supports keyboard controls and returns focus to the image that opened it.
 - Page transitions and subtle animations respect the visitor's reduced-motion preference.
+- A decorative custom cursor is enabled only when a fine, hovering pointer is available; touch-only devices keep their native interaction.
 - The ordering policy is presented in an expandable disclosure.
 
 ### Enquiries and contact
