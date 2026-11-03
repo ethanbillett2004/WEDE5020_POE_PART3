@@ -79,17 +79,10 @@
       return;
     }
 
-    const message = [
-      'Hi Abigail! I would like to enquire about:',
-      ...Object.entries(labels)
-        .map(([name, label]) => {
-          const value = form.elements[name].value.trim();
-          return value ? `${label}: ${value}` : '';
-        })
-        .filter(Boolean),
-      form.elements.notes.value.trim()
-    ].filter(Boolean).join('\n');
-    form.elements.text.value = message;
-    form.submit();
+    const message = window.EnquiryValidation.buildWhatsAppMessage(form, labels);
+    const whatsappUrl = new URL(form.action);
+    whatsappUrl.search = '';
+    whatsappUrl.searchParams.set('text', message);
+    window.location.assign(whatsappUrl.href);
   });
 })();
