@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ethanbillett2004.github.io/WEDE5020_POE_PART3/sitemap.xml
