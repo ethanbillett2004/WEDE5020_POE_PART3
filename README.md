@@ -140,6 +140,7 @@ WEDE5020_POE_PART3/
 │   └── styles.css
 ├── JS/
 │   ├── contact.js           # Asynchronous contact-form submission
+│   ├── cursor.js            # Fine-pointer custom cursor
 │   ├── gallery.js           # Gallery lightbox
 │   ├── products.js          # Product data, rendering, search and filters
 │   ├── script.js            # Multi-step enquiry form
