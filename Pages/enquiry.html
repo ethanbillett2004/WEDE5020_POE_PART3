@@ -36,15 +36,81 @@
       <section class="page-heading compact">
         <p class="eyebrow">Let's plan something lovely</p>
         <h1>Your idea.<br><em>A sweeter ending.</em></h1>
-        <p>Tell Abigail what you have in mind. Write your enquiry below, then open it in WhatsApp to review and send.</p>
+        <p>Tell Abigail what you have in mind, step by step. Review your enquiry, then open it in WhatsApp to send.</p>
       </section>
       <section class="enquiry-layout">
-        <form class="enquiry-form" action="https://wa.me/27711084105" method="get">
-          <label for="enquiry-message">Your enquiry</label>
-          <p id="enquiry-help">Include your name, contact number, type of treat, quantity or portions, preferred collection or delivery date, theme and colours. You can attach inspiration pictures in WhatsApp.</p>
-          <textarea id="enquiry-message" name="text" rows="12" maxlength="2000" required aria-describedby="enquiry-help" placeholder="Hi Abigail! I would like to enquire about…"></textarea>
-          <div class="actions">
-            <button class="button" type="submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
+        <form class="enquiry-form" action="https://wa.me/27711084105" method="get" novalidate>
+          <div class="enquiry-tabs" role="tablist" aria-label="Enquiry steps">
+            <button class="enquiry-tab" id="tab-contact" type="button" role="tab" aria-selected="true" aria-controls="panel-contact" tabindex="0">1. About you</button>
+            <button class="enquiry-tab" id="tab-order" type="button" role="tab" aria-selected="false" aria-controls="panel-order" tabindex="-1">2. Your order</button>
+            <button class="enquiry-tab" id="tab-design" type="button" role="tab" aria-selected="false" aria-controls="panel-design" tabindex="-1">3. Design &amp; collection</button>
+            <button class="enquiry-tab" id="tab-review" type="button" role="tab" aria-selected="false" aria-controls="panel-review" tabindex="-1">4. Review</button>
+          </div>
+
+          <section class="enquiry-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" tabindex="0">
+            <h2>How can Abigail reach you?</h2>
+            <label for="enquiry-name">Your name
+              <input id="enquiry-name" name="customer-name" type="text" autocomplete="name" required>
+            </label>
+            <label for="enquiry-phone">Contact number
+              <input id="enquiry-phone" name="customer-phone" type="tel" autocomplete="tel" required>
+            </label>
+            <label for="enquiry-email">Email address (optional)
+              <input id="enquiry-email" name="customer-email" type="email" autocomplete="email">
+            </label>
+          </section>
+
+          <section class="enquiry-panel" id="panel-order" role="tabpanel" aria-labelledby="tab-order" tabindex="0" hidden>
+            <h2>What would you like to order?</h2>
+            <label for="enquiry-treat">Treat
+              <select id="enquiry-treat" name="treat" required>
+                <option value="">Choose a treat</option>
+                <option>Custom cake</option>
+                <option>Bento cake</option>
+                <option>Cupcakes</option>
+                <option>Dessert</option>
+                <option>Other / not sure yet</option>
+              </select>
+            </label>
+            <label for="enquiry-quantity">Quantity or portions (optional)
+              <input id="enquiry-quantity" name="quantity" type="text" placeholder="e.g. 12 cupcakes or 10 portions">
+            </label>
+            <label for="enquiry-date">Preferred date (optional)
+              <input id="enquiry-date" name="date" type="date">
+            </label>
+          </section>
+
+          <section class="enquiry-panel" id="panel-design" role="tabpanel" aria-labelledby="tab-design" tabindex="0" hidden>
+            <h2>Share your ideas</h2>
+            <label for="enquiry-design">Theme, colours or design (optional)
+              <textarea id="enquiry-design" name="design" rows="4" placeholder="Tell Abigail about the occasion, theme, colours or inspiration."></textarea>
+            </label>
+            <label for="enquiry-collection">Collection or delivery (optional)
+              <select id="enquiry-collection" name="collection">
+                <option value="">Not decided yet</option>
+                <option>Collection</option>
+                <option>Delivery</option>
+              </select>
+            </label>
+            <label for="enquiry-dietary">Dietary requirements (optional)
+              <input id="enquiry-dietary" name="dietary" type="text" placeholder="Please confirm suitability with Abigail">
+            </label>
+          </section>
+
+          <section class="enquiry-panel" id="panel-review" role="tabpanel" aria-labelledby="tab-review" tabindex="0" hidden>
+            <h2>Review your enquiry</h2>
+            <p id="enquiry-help">Check the details below before continuing to WhatsApp. You can attach inspiration pictures there.</p>
+            <div class="enquiry-summary" id="enquiry-summary" aria-live="polite"></div>
+            <label for="enquiry-notes">Anything else? (optional)
+              <textarea id="enquiry-notes" name="notes" rows="4" placeholder="Add any other details for Abigail."></textarea>
+            </label>
+            <input type="hidden" name="text" value="">
+          </section>
+
+          <div class="actions enquiry-actions">
+            <button class="button enquiry-previous" type="button" hidden>Previous</button>
+            <button class="button enquiry-next" type="button">Next <span aria-hidden="true">→</span></button>
+            <button class="button enquiry-submit" type="submit" hidden>Continue to WhatsApp <span aria-hidden="true">↗</span></button>
           </div>
           <p class="small">WhatsApp opens with your message. Review it and press Send there. Your date is only reserved once Abigail confirms your order.</p>
         </form>
@@ -90,5 +156,105 @@
       </div>
       <small>© 2026 Sweet Treats by Abigail</small>
     </footer>
+    <script>
+      (() => {
+        const form = document.querySelector('.enquiry-form');
+        const tabs = Array.from(form.querySelectorAll('[role="tab"]'));
+        const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
+        const previousButton = form.querySelector('.enquiry-previous');
+        const nextButton = form.querySelector('.enquiry-next');
+        const submitButton = form.querySelector('.enquiry-submit');
+        const summary = form.querySelector('.enquiry-summary');
+        const labels = {
+          'customer-name': 'Name',
+          'customer-phone': 'Contact number',
+          'customer-email': 'Email',
+          treat: 'Treat',
+          quantity: 'Quantity or portions',
+          date: 'Preferred date',
+          design: 'Design ideas',
+          collection: 'Collection or delivery',
+          dietary: 'Dietary requirements'
+        };
+        let activeIndex = 0;
+
+        const showTab = (index, moveFocus = false) => {
+          activeIndex = index;
+          tabs.forEach((tab, tabIndex) => {
+            const selected = tabIndex === index;
+            tab.setAttribute('aria-selected', String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+            panels[tabIndex].hidden = !selected;
+          });
+          previousButton.hidden = index === 0;
+          nextButton.hidden = index === tabs.length - 1;
+          submitButton.hidden = index !== tabs.length - 1;
+          if (index === tabs.length - 1) updateSummary();
+          if (moveFocus) tabs[index].focus();
+        };
+
+        const updateSummary = () => {
+          summary.replaceChildren();
+          Object.entries(labels).forEach(([name, label]) => {
+            const value = form.elements[name].value.trim();
+            if (!value) return;
+            const row = document.createElement('p');
+            const heading = document.createElement('strong');
+            heading.textContent = `${label}: `;
+            row.append(heading, document.createTextNode(value));
+            summary.append(row);
+          });
+        };
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener('click', () => showTab(index));
+          tab.addEventListener('keydown', (event) => {
+            let nextIndex = index;
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % tabs.length;
+            else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + tabs.length) % tabs.length;
+            else if (event.key === 'Home') nextIndex = 0;
+            else if (event.key === 'End') nextIndex = tabs.length - 1;
+            else return;
+            event.preventDefault();
+            showTab(nextIndex, true);
+          });
+        });
+
+        previousButton.addEventListener('click', () => showTab(activeIndex - 1, true));
+        nextButton.addEventListener('click', () => {
+          const invalidField = panels[activeIndex].querySelector(':invalid');
+          if (invalidField) {
+            invalidField.reportValidity();
+            invalidField.focus();
+            return;
+          }
+          showTab(activeIndex + 1, true);
+        });
+
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const invalidField = form.querySelector(':invalid');
+          if (invalidField) {
+            const invalidPanel = panels.findIndex((panel) => panel.contains(invalidField));
+            showTab(invalidPanel, true);
+            invalidField.reportValidity();
+            return;
+          }
+
+          const message = [
+            'Hi Abigail! I would like to enquire about:',
+            ...Object.entries(labels)
+              .map(([name, label]) => {
+                const value = form.elements[name].value.trim();
+                return value ? `${label}: ${value}` : '';
+              })
+              .filter(Boolean),
+            form.elements.notes.value.trim()
+          ].filter(Boolean).join('\n');
+          form.elements.text.value = message;
+          form.submit();
+        });
+      })();
+    </script>
   </body>
 </html>

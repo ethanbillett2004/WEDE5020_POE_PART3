@@ -921,6 +921,64 @@ header .brand .brand-words>span {
    
 }
 
+.enquiry-tabs {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:.5rem;
+  margin-bottom:2rem
+}
+
+.enquiry-tab {
+  min-height:3.5rem;
+  padding:.65rem .75rem;
+  border:1px solid var(--line);
+  border-radius:3px;
+  background:white;
+  color:var(--ink);
+  font-size:.85rem;
+  line-height:1.35
+}
+
+.enquiry-tab[aria-selected="true"] {
+  border-color:var(--wine);
+  background:var(--wine);
+  color:white
+}
+
+.enquiry-panel h2 {
+  font-size:clamp(1.7rem,3vw,2.4rem);
+  margin:0 0 1.5rem
+}
+
+.enquiry-panel label {
+  margin-bottom:1rem
+}
+
+.enquiry-summary {
+  padding:1rem 1.25rem;
+  margin-bottom:1.5rem;
+  border-left:3px solid var(--wine);
+  background:#fff
+}
+
+.enquiry-summary p {
+  margin:.25rem 0;
+  overflow-wrap:anywhere
+}
+
+.enquiry-actions .button[hidden] {
+  display:none
+}
+
+.enquiry-actions .enquiry-previous {
+  background:transparent;
+  color:var(--wine)
+}
+
+.enquiry-actions .enquiry-previous:hover {
+  background:var(--pink)
+}
+
 .enquiry-form textarea  {
    line-height: 1.65;
    
@@ -970,6 +1028,11 @@ header .brand .brand-words>span {
    
 }
 
+@media(max-width:650px) {
+  .enquiry-tabs {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
   header .brand  {
    gap: .5rem;
    
@@ -993,4 +1056,3 @@ header .brand .brand-words>span {
 
 
 }
-
