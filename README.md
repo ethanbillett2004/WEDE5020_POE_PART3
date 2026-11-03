@@ -35,7 +35,7 @@ The website is designed to work on desktop, tablet, and mobile screens.
 
 ## Part 2 Fixes and Refinements
 
-The project notes carried forward from Part 2 do not record specific assessor recommendations. The following refinements address issues and areas for improvement in the earlier site and provide a more consistent foundation for Part 3:
+The following refinements address issues and areas for improvement in the earlier site and provide a more consistent foundation for Part 3:
 
 - Improved consistency of page layouts, navigation, footer content, and visual styling.
 - Refined responsive layouts and image sizing for smaller screens.
