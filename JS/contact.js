@@ -6,25 +6,41 @@
   const submitButton = form.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.textContent;
 
-  const openMailClientFallback = () => {
+  const showSendAlternatives = (message) => {
     const formData = new FormData(form);
     const name = (formData.get('name') || '').toString().trim();
     const email = (formData.get('email') || '').toString().trim();
     const phone = (formData.get('phone') || '').toString().trim();
     const subject = (formData.get('subject') || '').toString().trim();
-    const message = (formData.get('message') || '').toString().trim();
+    const body = (formData.get('message') || '').toString().trim();
 
-    const mailBody = [
+    const messageBody = [
       `Name: ${name}`,
       `Email: ${email}`,
-      `Phone: ${phone}`,
+      phone ? `Phone: ${phone}` : '',
+      `Subject: ${subject}`,
       '',
-      message
+      body
     ].filter((line) => line !== '').join('\n');
+    const emailLink = `mailto:abigail.billett17@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(messageBody)}`;
+    const whatsappLink = `https://wa.me/27711084105?text=${encodeURIComponent(messageBody)}`;
 
-    const mailtoLink = `mailto:abigail.billett17@gmail.com?subject=${encodeURIComponent(subject || 'Website enquiry - Sweet Treats by Abigail')}&body=${encodeURIComponent(mailBody)}`;
-    status.textContent = 'Your email app is opening with your message pre-filled. Please send it from there, or open this page through a web server to use the online form.';
-    window.location.href = mailtoLink;
+    status.replaceChildren(document.createTextNode(`${message} `));
+    [
+      { href: whatsappLink, text: 'Send with WhatsApp', newTab: true },
+      { href: emailLink, text: 'Send with email', newTab: false }
+    ].forEach((option, index) => {
+      if (index) status.append(document.createTextNode(' · '));
+      const link = document.createElement('a');
+      link.href = option.href;
+      link.className = 'text-button';
+      link.textContent = option.text;
+      if (option.newTab) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+      status.append(link);
+    });
   };
 
   form.addEventListener('submit', async (event) => {
@@ -39,7 +55,7 @@
     }
 
     if (window.location.protocol === 'file:') {
-      openMailClientFallback();
+      showSendAlternatives('Online sending is unavailable when this page is opened directly from a file. Your message is ready to send:');
       return;
     }
 
@@ -69,7 +85,7 @@
       status.textContent = 'Thanks! Your message has been sent. Abigail will get back to you soon.';
     } catch (error) {
       console.error('Contact form submission failed:', error);
-      status.textContent = 'Your message could not be sent. Please try again, call Abigail on 071 108 4105, or contact her on WhatsApp.';
+      showSendAlternatives('The online form could not send your message. Your message is still here; send it using:');
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
